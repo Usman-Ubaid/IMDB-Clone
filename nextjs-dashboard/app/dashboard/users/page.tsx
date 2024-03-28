@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/users/users.module.css";
@@ -9,13 +8,14 @@ import { fetchUsers } from "@/app/lib/data";
 type UsersPageProps = {
   searchParams: {
     q?: string;
+    page?: string;
   };
 };
 
 const UsersPage = async ({ searchParams }: UsersPageProps) => {
   const q = searchParams?.q || "";
-
-  const users = await fetchUsers(q);
+  const page = searchParams?.page || "1";
+  const { countUsers, users } = await fetchUsers(q, page);
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -70,7 +70,7 @@ const UsersPage = async ({ searchParams }: UsersPageProps) => {
           ))}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination count={countUsers} />
     </div>
   );
 };
