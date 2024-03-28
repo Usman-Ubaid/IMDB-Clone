@@ -30,4 +30,23 @@ export const addUser = async (formData: FormData) => {
   redirect("/dashboard/users");
 };
 
+export const addProduct = async (formData: FormData) => {
+  const { title, desc, price, stock, color, size } =
+    Object.fromEntries(formData);
 
+  connectToDB();
+
+  const newProduct = new Product({
+    title,
+    desc,
+    price,
+    stock,
+    color,
+    size,
+  });
+
+  await newProduct.save();
+
+  revalidatePath("/dashboard/products");
+  redirect("/dashboard/products");
+};
