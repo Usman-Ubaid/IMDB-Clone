@@ -56,9 +56,7 @@ export const fetchProducts = async (q: string, page: string) => {
 export const fetchProduct = async (id: string) => {
   try {
     connectToDB();
-    const product = await Product.findById({
-      id,
-    });
+    const product = await Product.findById(id);
 
     return product;
   } catch (error) {
