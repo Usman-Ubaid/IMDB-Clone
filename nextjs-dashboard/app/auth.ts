@@ -21,7 +21,6 @@ const getUser = async (credentials: {
       user.password
     );
     if (!isPasswordCorrect) throw new Error("Wrong Credentials!");
-    console.log(user);
     return user;
   } catch (error) {
     console.log(error);
