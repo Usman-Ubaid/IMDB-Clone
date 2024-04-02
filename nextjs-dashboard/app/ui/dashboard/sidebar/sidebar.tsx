@@ -79,7 +79,8 @@ const menuItems = [
 ];
 
 const Sidebar = async () => {
-  const { user } = await auth();
+  const session = await auth();
+  const user = session;
   return (
     <div className={styles.container}>
       <div className={styles.user}>
@@ -91,7 +92,7 @@ const Sidebar = async () => {
           height="50"
         />
         <div className={styles.userDetails}>
-          <span className={styles.username}>{user && user.username}</span>
+          <span className={styles.username}>{user && user.user.username}</span>
           <span className={styles.userTitle}>Administrator</span>
         </div>
       </div>

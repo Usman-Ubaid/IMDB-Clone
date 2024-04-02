@@ -50,7 +50,7 @@ export const { auth, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (token) {
+      if (token && session.user) {
         session.user.username = token.username;
       }
       return session;
